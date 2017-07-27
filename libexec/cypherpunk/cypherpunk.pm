@@ -11,6 +11,7 @@ sub server_info {
 	my ($server) = @_;
 	$server =~ s/freebsd1.tokyo/devtokyo1/;
 	$server =~ s/freebsd\d\.//;
+	$server =~ s/vpn\d\.//;
 	$server =~ s/vpn3/devhonolulu/;
 	$server =~ s/freebsd-test.tokyo/devtokyo3/;
 	my $curl = WWW::Curl::Easy->new;

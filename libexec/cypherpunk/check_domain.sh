@@ -14,7 +14,7 @@
 # Reporting Bugs: https://github.com/glensc/nagios-plugin-check_domain/issues/new
 
 # fail on first error, do not continue
-set -e
+#set -e
 
 PROGRAM=${0##*/}
 VERSION=1.5.0
@@ -207,7 +207,10 @@ run_whois() {
 
 	setup_whois
 
-	$whois ${server:+-h $server} "$domain" > "$outfile" 2>&1 && error=$? || error=$?
+	#$whois ${server:+-h $server} "$domain" > "$outfile" 2>&1 #&& error=$? || error=$?
+	$whois ${server:+-h $server} "$domain" > "$outfile" 2>&1
+	error=0
+	cat $outfile
 	[ -s "$outfile" ] || die "$STATE_UNKNOWN" "UNKNOWN - Domain $domain doesn't exist or no WHOIS server available."
 
 	if grep -q -e "No match for" -e "NOT FOUND" -e "NO DOMAIN" $outfile; then
