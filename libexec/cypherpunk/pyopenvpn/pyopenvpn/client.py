@@ -87,6 +87,7 @@ class Client:
         self.log.info("connecting to %s:%d %s...", self.host, self.port, self.proto)
         self.starttime = time.time()
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) if self.proto == "udp" else socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.socket.bind(("0.0.0.0", 0))
         self.socket.connect((self.host, self.port))
 
         self.ctrl = ControlChannel(self)
